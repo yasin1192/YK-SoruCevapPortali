@@ -28,6 +28,8 @@
           </div>
         </div>
       </form>
+      <div [ngClass]="sonuc.islem ? 'alert alert-success':'alert alert-danger'" *ngIf="sonuc.mesaj?.length>0">
+        {{sonuc.mesaj}}</div>
     </div>
   </div>
 </div>

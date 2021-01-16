@@ -1,3 +1,4 @@
+import { Sonuc } from './../../models/sonuc';
 import { FbServisService } from './../../services/fbServis.service';
 import { Soru } from './../../models/soru';
 import { Component, OnInit } from '@angular/core';
@@ -12,6 +13,7 @@ export class SoruduzenleComponent implements OnInit {
   key: string;
   secSoru: Soru = new Soru();
   uid: string;
+  sonuc: Sonuc = new Sonuc();
   constructor(
     public route: ActivatedRoute,
     public fbServis: FbServisService,
@@ -38,7 +40,9 @@ export class SoruduzenleComponent implements OnInit {
     var tarih = new Date();
     this.secSoru.duzTarih = tarih.getTime().toString();
     this.fbServis.SoruDuzenle(this.secSoru).then(d => {
-      this.router.navigate(['/soru']);
+      this.sonuc.islem = true;
+      this.sonuc.mesaj = "Soru Güncellendi";
+
     });
   }
 }

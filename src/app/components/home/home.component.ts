@@ -64,12 +64,13 @@ export class HomeComponent implements OnInit {
       this.secKayit.islem = false;
       this.fbServis.KayitDuzenle(this.secKayit).then(d => {
         this.sonuc.islem = true;
-        this.sonuc.mesaj = "Kayıt Güncellendi";
+        this.sonuc.mesaj = "Soru Güncellendi";
       });
     }
   }
 
   KayitSec(k: Kayit) {
+    this.sonuc.mesaj = null;
     Object.assign(this.secKayit, k);
 
   }
