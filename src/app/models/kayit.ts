@@ -1,6 +1,6 @@
 export class Kayit {
     key: string;
-
+    uid: string;
     soru: string;
     cevap: string;
     islem: boolean;

@@ -43,7 +43,7 @@ export class SorucevaplaComponent implements OnInit {
       data.forEach(satir => {
         const y = { ...satir.payload.toJSON(), key: satir.key };
         this.sorular.push(y as Soru);
-        this.secKayit.soru = this.secSoru.soru;
+
       });
     });
   }
@@ -58,12 +58,16 @@ export class SorucevaplaComponent implements OnInit {
 
   Kaydet() {
     var tarih = new Date();
+    this.secKayit.uid = this.secSoru.uid;
+    this.secKayit.soru = this.secSoru.soru;
+
     if (this.secKayit.key == null) {
       this.secKayit.kayTarih = tarih.getTime().toString();
       this.secKayit.duzTarih = tarih.getTime().toString();
       this.secKayit.islem = false;
       this.fbServis.CevapEkle(this.secKayit).then(d => {
         this.secKayit.islem = true;
+
         this.secKayit.mesaj = "Cevap Eklendi";
       });
     } else {
@@ -74,7 +78,7 @@ export class SorucevaplaComponent implements OnInit {
         this.sonuc.mesaj = "Cevap Güncellendi";
       });
     }
-    this.key = null;
+    this.secKayit.cevap = null;
 
   }
 

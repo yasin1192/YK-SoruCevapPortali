@@ -1,12 +1,14 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-12">
-      Merhaba <b>{{adsoyad}}</b>,
+      <h5>Merhaba <b>{{adsoyad}}</b>,</h5>
+      <h3>Hazırlanan Sorular</h3>
       <button class="btn btn-outline-danger" style="float:right" (click)="OturumKapat()"
         *ngIf="fbServis.OturumKontrol()">Oturumu
         Kapat</button>
-      <br>
+
       <button class="btn btn-outline-primary" [routerLink]="['/soruekle']">Soru Ekle</button>
+      <button class="btn btn-outline-success ml-2" [routerLink]="['/']">Cevapları Görüntüle</button>
     </div>
   </div>
   <div class="row">

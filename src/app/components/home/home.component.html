@@ -10,9 +10,9 @@
 
   <div class="row alert alert-secondary" *ngIf="detay">
     <div class="col-md-6">
-      <h5>Başlık</h5>
+      <h5>Soru</h5>
       <p>{{secKayit.soru}}</p>
-      <h5>Açıklama</h5>
+      <h5>Cevap</h5>
       <p>{{secKayit.cevap}}</p>
     </div>
     <div class="col-md-6">
@@ -21,7 +21,7 @@
       <h5>Düzenleme Tarihi</h5>
       <p>{{secKayit.duzTarih | date:'dd.MM.yyyy HH:mm:sss'}}</p>
 
-      <h5>Durumu</h5>
+      <h5>Uygunluğu</h5>
       <p><span class="badge badge-pill bg-success text-white" *ngIf="secKayit.islem">Tamamlandı</span>
         <span class="badge badge-pill bg-danger text-white" *ngIf="!secKayit.islem">Bekliyor</span>
       </p>
@@ -54,15 +54,17 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h4>Gelen Cevaplar</h4>
-      <button class="btn btn-outline-info btn-sm" (click)="ekleduzenle=true;">Cevap Ekle</button>
-      <button class="btn btn-outline-danger btn-sm ml-2" (click)="OturumuKapat()">Oturumu Kapat</button>
+      <h5>Merhaba <b>{{adsoyad}},</b></h5>
+      <h3>Gelen Cevaplar</h3>
+      <button class="btn btn-outline-danger" style="float:right" (click)="OturumuKapat()"
+        *ngIf="fbServis.OturumKontrol()">Oturumu
+        Kapat</button>
       <button class="btn btn-outline-success btn-sm ml-2" [routerLink]="['/soru']">Soruları Görüntüle</button>
       <table class="table mt-2">
         <thead>
-          <td>Başlık</td>
-          <td>Durumu</td>
-          <td>İşlem</td>
+          <td>Soru</td>
+          <td>Uygunluğu</td>
+          <td>Cevap Uygunluğu</td>
           <td>Detay</td>
           <td>Düzenle</td>
           <td>Sil</td>
@@ -71,23 +73,23 @@
           <tr *ngFor="let kayit  of kayitlar">
             <td>{{kayit.soru}}</td>
             <td>
-              <span class="badge badge-pill bg-success text-white" *ngIf="kayit.islem">Tamamlandı</span>
-              <span class="badge badge-pill bg-danger text-white" *ngIf="!kayit.islem">Bekliyor</span>
+              <span class="badge badge-pill bg-success text-white" *ngIf="kayit.islem">Uygun</span>
+              <span class="badge badge-pill bg-danger text-white" *ngIf="!kayit.islem">Uygun Değil</span>
             </td>
             <td>
 
               <button class="btn btn-outline-success btn-sm" (click)="TamamlaIptal(kayit,true)"
-                *ngIf="!kayit.islem">Tamamlandı Yap</button>
+                *ngIf="!kayit.islem">Uygun Yap</button>
               <button class="btn btn-outline-danger btn-sm" (click)="TamamlaIptal(kayit,false)"
-                *ngIf="kayit.islem">Tamamlandı İptal Et</button>
+                *ngIf="kayit.islem">Uygunluğu İptal Et</button>
 
             </td>
             <td><button class="btn btn-outline-info btn-sm" (click)="KayitSec(kayit);detay=true;">Detay</button>
             </td>
             <td><button class="btn btn-outline-warning btn-sm" (click)="KayitSec(kayit);ekleduzenle=true;"
-                *ngIf="uid==secSoru.uid">Düzenle</button></td>
+                *ngIf="this.uid==kayit.uid">Düzenle</button></td>
             <td><button class="btn btn-outline-danger btn-sm" (click)="KayitSec(kayit);silme=true;"
-                *ngIf="uid==secSoru.uid">Sil</button></td>
+                *ngIf="this.uid==kayit.uid">Sil</button></td>
 
           </tr>
         </tbody>
